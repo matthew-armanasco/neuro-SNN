@@ -1,0 +1,8 @@
+name: snnenv
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - snntorch
+  - ipykernel
+prefix: /home/matthew/miniconda3/envs/snnenv
