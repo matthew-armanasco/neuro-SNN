@@ -11,4 +11,4 @@ __pycache__/
 # Simulation / data stuff
 data/
 sample_data/
-
+tmp/
