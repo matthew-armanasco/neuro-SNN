@@ -1,0 +1,22 @@
+import numpy as np
+
+# load your spike output (if already saved earlier)
+data = np.loadtxt("spike_output1.txt", delimiter=',', dtype=int)
+
+num_timesteps, num_neurons = data.shape
+
+with open("spike_data1.h", "w") as f:
+    f.write("#include <avr/pgmspace.h>\n\n")
+    f.write(f"const uint16_t num_timesteps = {num_timesteps};\n")
+    f.write(f"const uint8_t num_neurons = {num_neurons};\n\n")
+    f.write(f"const uint8_t spike_data[][10] PROGMEM = {{\n")
+
+    # write each row
+    for i, row in enumerate(data):
+        row_str = ", ".join(map(str, row))
+        end_char = "," if i < len(data) - 1 else ""
+        f.write(f"  {{{row_str}}}{end_char}\n")
+
+    f.write("};\n")
+
+print(f"Saved spike_data.h with {num_timesteps} timesteps and {num_neurons} neurons.")
